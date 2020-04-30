@@ -14,3 +14,12 @@ GET : ‘/:listingId/reviews’ - to retrieve all the reviews for that listing i
 
 GET : ‘/users/show/:userId’ - to retrieve all the reviews for all the listings of that user id & reviews that user has left on other listings
 
+UPDATE : ‘/:listingId/:reviewId’ - If I am a user, and want to update a review I posted, I would want to access a specific listing, and update the review I posted on that listing. Therefore this review would be updated by accessing that :listingId and updating that :reviewId.
+
+AIRBNB DOES NOT ALLOW USERS TO EDIT REVIEWS AFTER POSTING.
+
+DELETE : ‘:listingId/:reviewId’ - If I am a user and want to delete a review I’ve posted on a listing, I would need to access that listing ( /:listingId ) and review ( /:reviewId ) and delete that review from that listing.
+
+AIRBNB DOES NOT ALLOW USERS TO REMOVE REVIEWS AFTER POSTING.
+
+
