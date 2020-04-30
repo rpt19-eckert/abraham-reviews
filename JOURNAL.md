@@ -12,4 +12,5 @@ GET : ‘/reviews’ - to retrieve all reviews
 
 GET : ‘/:listingId/reviews’ - to retrieve all the reviews for that listing id
 
-GET : ‘/users/show/:userId’ - to retrieve all the reviews for all the listings of that user and reviews that user has left on other listings
+GET : ‘/users/show/:userId’ - to retrieve all the reviews for all the listings of that user id & reviews that user has left on other listings
+
