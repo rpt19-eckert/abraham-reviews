@@ -45,14 +45,14 @@ _____________________________________________________________
   "name":"Solidstate_Bandwidth_Nextgeneration_house",
   "reviews":[
     {
-      "_id":"5ebb66e89475980c9cde64ba",
+      "_id":"5ebb66e89475980c9cde64ba", //OBJECT ID
       "username":"Jessy Hammes",
       "date":"September 2018",
       "text":"Possimus omnis et voluptatem. Quas consequatur at sunt reiciendis labore. Sequi velit atque ut ut odio repudiandae asperiores. Inventore et est consequatur vero deserunt. Maiores dignissimos quae repellendus eveniet recusandae.",
       "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/thekevinjones/128.jpg",
       "scores":[
         {
-          "_id":"5ebb66e89475980c9cde64bd",
+          "_id":"5ebb66e89475980c9cde64bd", //OBJECT ID
           "cleanliness":3.6,
           "communication":1.7,
           "checkin":1,
