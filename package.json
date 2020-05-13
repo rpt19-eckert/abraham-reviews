@@ -8,20 +8,22 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "build": "webpack --mode=production",
+    "build": "webpack --watch --mode=production",
     "react-dev": "webpack -d --watch --mode=development",
     "server-dev": "nodemon server/index.js",
-    "seed": "node ./database/seed.js",
+    "seed": "node ./database/seedApi.js",
     "test": "jest"
   },
   "dependencies": {
     "express": "^4.17.1",
     "express-static-gzip": "^2.0.6",
     "faker": "^4.1.0",
+    "jquery": "^3.5.1",
     "minimist": "^1.2.5",
     "mongo-seeding": "^3.4.0",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.4",
+    "nodemon": "^2.0.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "regenerator-runtime": "^0.13.5"
@@ -42,7 +44,8 @@
     "jest-cli": "^25.1.0",
     "supertest": "^4.0.2",
     "url-loader": "^4.0.0",
-    "webpack": "^4.42.0"
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   },
   "babel": {
     "presets": [

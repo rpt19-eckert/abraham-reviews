@@ -34,16 +34,17 @@ class App extends React.Component {
       listingId = '10001';
     }
     $.ajax({
+      url: 'http://localhost:3004/listing',
       type: 'GET',
-      url: "http://ec2-13-57-252-100.us-west-1.compute.amazonaws.com:3004/listing",
       data: {data: listingId},
       dataType: 'text',
       success: (results) => {
         let state = JSON.parse(results);
+        console.log('state: ', state)
         this.setState(() => ({reviews: state}));
       },
-      error: () => {
-        console.log('error in onload API call');
+      error: (err) => {
+        console.log('error in onload API call', err);
       }
     });
   }

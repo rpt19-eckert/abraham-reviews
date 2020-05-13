@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const { Reviews } = require('../database/index');
-var expressStaticGzip = require("express-static-gzip");
+var expressStaticGzip = require("express-static-gzip")
+const extend = require('../database/extendApi.js')
 
 let app = express();
 
@@ -53,12 +54,14 @@ app.get('/averageScore:id', (req, res) => {
 //Get listing by either id or name
 app.get('/listing', (req, res) => {
   let listId = req.query.data || 10001;
+  console.log('list id: ', listId)
   let reg = /\d{5}/;
   //test to see if id num or listing string
   let result = reg.test(listId);
 
   //if text of listing...
   if (!result) {
+    console.log('result: ', result)
     Reviews.find({name: listId}, (err, result) => {
       if (err) {
         console.log('error in Reviews.find', err);
@@ -70,6 +73,7 @@ app.get('/listing', (req, res) => {
     //else if id of listing...
   } else {
     Reviews.find({id: listId}, (err, result) => {
+      console.log(JSON.stringify(result))
       if (err) {
         console.log('error in Reviews.find', err);
         res.sendStatus(404);
@@ -85,6 +89,13 @@ app.get('/:id', (req, res) => {
   console.log('send file');
   res.sendFile(path.join(__dirname, '../public', '/index.html'));
 });
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.get('/new/review', (req, res) => {
+  extend.Reviews.create();
+})
 
 app.listen(3004, () => {
   console.log('Express server for REVIEWS listening on port 3004');
