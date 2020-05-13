@@ -13,7 +13,7 @@ let floatNum = () => {
   let rand1 = Math.floor(Math.random() * Math.floor(5));
   let rand2 = Math.floor(Math.random() * Math.floor(9));
   let result = rand1 + '.' + rand2;
-  return +result;
+  return result;
 }
 
 let sampleData = [];
@@ -72,5 +72,3 @@ Reviews.deleteMany({id: {$gt: 1}}, (err) => {
     })
   }
 });
-
-//TODO: Is there a way to conclude a file running to give control back to command line?
