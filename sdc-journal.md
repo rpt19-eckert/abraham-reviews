@@ -1,4 +1,4 @@
-##*Support CRUD from your API
+## Support CRUD from your API
 ________________________________
 ## Extend the existing API to support all CRUD operations. This should be done with the inherited DBMS.
 
@@ -37,7 +37,7 @@ _____________________________________________________________
 }
 ```
 
-### GET: */:listId* : 1086
+### GET: */:listId* : 10086
 ```
 {
   "id":10086,
