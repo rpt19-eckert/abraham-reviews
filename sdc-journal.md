@@ -65,7 +65,33 @@ _____________________________________________________________
 }
 ```
 
-## PUT:
+## UPDATE:
+
+```
+{
+  "id":10045,
+  "name":"vel impedit sunt",
+  "reviews":[
+    {
+      "_id":"5ebe014db496df0a065abc33",
+      "username":"Edwin Homenick",
+      "date":"July 2019",
+      "text":"Molestias modi totam. Inventore perspiciatis qui quos aut. Sed soluta odit quia non ut beatae dignissimos. Et tenetur ut.
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/brandonburke/128.jpg",
+      "scores":[
+        {
+          "_id":"5ebe014db496df0a065abc34",
+          "cleanliness":4.1,
+          "communication":3.8,"checkin":0,
+          "accuracy":3.7,
+          "location":3.7,
+          "value":1
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## DELETE:
 

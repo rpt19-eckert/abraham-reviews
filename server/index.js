@@ -3,6 +3,8 @@ const path = require('path');
 const { Reviews } = require('../database/index');
 var expressStaticGzip = require("express-static-gzip")
 const extend = require('../database/extendApi.js')
+const faker = require('faker')
+const { genYear, randomRating } = require('../database/extendApi.js');
 
 let app = express();
 
@@ -92,13 +94,81 @@ app.get('/:id', (req, res) => {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//POST NEW REVIEW
 app.get('/new/review', (req, res) => {
-  extend.Reviews.create();
+  /* generate random year */
+  let genYear = () => {
+    let years = [2015, 2016, 2017, 2018, 2019, 2020];
+    let randPick = Math.floor(Math.random() * Math.floor(6));
+    return years[randPick];
+  }
+  /* create random rating */
+  let randomRating = () => {
+    let rand1 = Math.floor(Math.random() * Math.floor(5));
+    let rand2 = Math.floor(Math.random() * Math.floor(9));
+    let result = rand1 + '.' + rand2;
+    return result;
+  }
+  /* generate unique id */
+  let incrementIdValue = () => {
+    let id = 10101;
+    let store = [];
+    if (store.includes(id)) {
+      id++;
+    } else {
+      store.push(id);
+    }
+    return id;
+  }
+    Reviews.create({
+      id: incrementIdValue(), //need to resolve by incrementing +1 each time a new review is created.
+      name: faker.name.findName(),
+      reviews: {
+        username: faker.name.findName(),
+        date: `${faker.date.month()} ${genYear()}`,
+        text: faker.lorem.paragraph(),
+        avatar: faker.internet.avatar(),
+        scores: [
+          {
+            cleanliness: randomRating(),
+            communication: randomRating(),
+            checkin: randomRating(),
+            accuracy: randomRating(),
+            location: randomRating(),
+            value: randomRating()
+          }
+        ]
+      }
+    }, (err, data) => {
+      if (err) {
+        res.status(404).json('Error posting new review.')
+      } else {
+        console.log('Successful create');
+        res.status(200).send(data)
+      }
+    });
 })
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.get('/update/:listingId', (req, res) => {
+  let listingId = req.params.listingId;
+  console.log('listing id: ', listingId);
+  let query = {id : listingId }
+  Reviews.findOneAndUpdate(query, {name: faker.lorem.words()}, (err, data) => {
+    if (err){
+      res.status(404).send(err)
+    } else {
+      console.log('successful update: ', data);
+      res.status(200).send(data);
+    }
+  });
+})
+
+
+
 app.listen(3004, () => {
-  console.log('Express server for REVIEWS listening on port 3004');
+  console.log('Listening on port 3004');
 });
 
 module.exports = app;
