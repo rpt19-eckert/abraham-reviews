@@ -2,9 +2,7 @@ const express = require('express');
 const path = require('path');
 const { Reviews } = require('../database/index');
 var expressStaticGzip = require("express-static-gzip")
-const extend = require('../database/extendApi.js')
 const faker = require('faker')
-const { genYear, randomRating } = require('../database/extendApi.js');
 
 let app = express();
 
@@ -94,8 +92,9 @@ app.get('/:id', (req, res) => {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //POST NEW REVIEW
-app.get('/new/review', (req, res) => {
+app.post('/listing/review', (req, res) => {
   /* generate random year */
   let genYear = () => {
     let years = [2015, 2016, 2017, 2018, 2019, 2020];
@@ -151,19 +150,35 @@ app.get('/new/review', (req, res) => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.get('/update/:listingId', (req, res) => {
+app.put('/listing/update/:listingId', (req, res) => {
   let listingId = req.params.listingId;
   console.log('listing id: ', listingId);
-  let query = {id : listingId }
-  Reviews.findOneAndUpdate(query, {name: faker.lorem.words()}, (err, data) => {
+  let updateQuery = { id : listingId }
+  Reviews.findOneAndUpdate(updateQuery, {name: faker.lorem.words()}, (err, data) => {
     if (err){
       res.status(404).send(err)
     } else {
-      console.log('successful update: ', data);
+      console.log('successful update: ', data.name);
       res.status(200).send(data);
     }
   });
-})
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.delete('/listing/delete/:listingId', (req, res) => {
+  let listingId = req.params.listingId;
+  console.log('listing id: ', listingId);
+  let deleteQuery = { id: listingId }
+  Reviews.deleteOne(deleteQuery, (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      console.log('Successful delete.')
+      res.status(200).send('File deleted.');
+    }
+  });
+});
 
 
 
