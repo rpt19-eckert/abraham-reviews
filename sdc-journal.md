@@ -100,3 +100,32 @@ Successful delete.
 
 State: []
 ```
+
+__________________________________________________________________
+
+## I am going to use postgresql for my database selection throughout SDC.
+### My schema is designed to take an object of:
+*listing id, listing name, listing reviews (an array that contains user reviews):*
+*username, date, text, avatar, scores (an array of ratings on specifics about this listing*
+```
+  id: Number,
+  name: String,
+  reviews: [
+    {
+      username: String,
+      date: String,
+      text: String,
+      avatar: String,
+      scores: [
+        {
+          cleanliness: Number,
+          communication: Number,
+          checkin: Number,
+          accuracy: Number,
+          location: Number,
+          value: Number
+        }
+      ]
+    }
+  ]
+```
