@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const { Reviews } = require('../database/index');
+const db = require('../database/postgresql/pgIndex.js')
 var expressStaticGzip = require("express-static-gzip")
 const faker = require('faker')
 
