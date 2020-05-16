@@ -180,6 +180,23 @@ app.delete('/listing/delete/:listingId', (req, res) => {
   });
 });
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.get('/listing/:listingId', (req, res) => {
+  let listingId = req.params.listingId;
+  console.log('listing id: ', listingId);
+  let query = { id: listingId }
+  Reviews.findOne(query, (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      console.log('Successful get.')
+      res.status(200).send('File retrieved.');
+    }
+  });
+});
+
+
 
 
 app.listen(3004, () => {
