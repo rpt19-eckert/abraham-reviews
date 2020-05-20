@@ -28,7 +28,7 @@ let reviewsSchema = mongoose.Schema({
         }
       ]
     }
-  ],
+  ]
 });
 
 let Reviews = mongoose.model('Reviews', reviewsSchema);
