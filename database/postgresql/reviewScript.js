@@ -24,19 +24,13 @@ let randomYear = () => {
   return years[year];
 }
 
-
-
-
-
-
-
 /*
 create 10 files to populate 1 million records into each
 create a for loop to 10, on each iteration create a new csv file which populates another 1 million
 */
 
 let reviewStream = fs.createWriteStream(path);
-reviewStream.write(JSON.stringify(columns), 'utf8');
+reviewStream.write(`id,username,date,text,avatar\n`, 'utf8');
 
 /* needs work to be fully automatic*/
 function writeReviews (writer, encoding, callback) {
@@ -47,17 +41,15 @@ function writeReviews (writer, encoding, callback) {
     do {
       toReach--;
       currentId++;
-      let data = [
-        { id: currentId },
-        { username: faker.internet.userName() },
-        { date: `${faker.date.month()} ${randomYear()}` },
-        { text: faker.lorem.sentences() },
-        { avatar: faker.image.avatar() }
-      ]
+      let username = faker.internet.userName();
+      let date = `${faker.date.month()} ${randomYear()}`
+      let text = faker.lorem.sentences();
+      let avatar = faker.image.avatar();
+      let data = `${currentId},${username},${date},${text},${avatar}\n`;
       if (toReach === 0) {
-        writer.write(JSON.stringify(data), encoding, callback);
+        writer.write(data, encoding, callback);
       } else  {
-        ok = writer.write(JSON.stringify(data), encoding);
+        ok = writer.write(data, encoding);
       }
     }
     while (toReach > 0 && ok);
@@ -70,42 +62,4 @@ function writeReviews (writer, encoding, callback) {
 
 writeReviews(reviewStream, 'utf-8', () => {
   reviewStream.end();
-})
-
-
-
-
-
-
-// while (currentId <= toReach) {
-//   currentId++;
-//   generatedReviews.push(
-//     { id: currentId },
-//     { username: faker.internet.userName() },
-//     { date: `${faker.date.month()} ${randomYear()}` },
-//     { text: faker.lorem.sentences() },
-//     { avatar: faker.image.avatar() }
-//   )
-// }
-
-// let writeStream = fs.createWriteStream(path);
-// stringify(generatedReviews, { heaeder: true, columns: columns}, (err, data) => {
-//   if (err) {
-//     throw err;
-//   } else {
-//     writeStream.write(data);
-//   }
-//   writeStream.on('finish', () => console.log('wrote all data to file'));
-//   writeStream.end();
-// });
-
-//use csv-stringify to stringiy columns and data
-/*
-stringify(generatedReviews, { header: true, columns: columns}, (err, data) => {
-  if (err) throw err;
-  fs.writeFile(path, data, (err) => {
-    if (err) throw err;
-    console.log(`Path saved at ${path}`);
-  });
 });
-*/

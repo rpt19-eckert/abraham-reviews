@@ -33,6 +33,6 @@ public/d952f3584101a206dc267a0f3ef61c24.png
 # inherited file not being used
 database/seed.js
 
-/csv/Reviews
-/csv/Listing
-/csv/Scores
+/csv/Reviews/
+/csv/Listings/
+/csv/Scores/
