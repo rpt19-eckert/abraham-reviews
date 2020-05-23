@@ -52,28 +52,32 @@ const Review = sequelize.define('Review', {
 const Score = sequelize.define('Score', {
   // scores: [
     // {
-      cleanliness: {
+      id: {
         type: DataTypes.INTEGER,
+        primaryKey: true
+      },
+      cleanliness: {
+        type: DataTypes.DECIMAL,
         allowNull: false
       },
       communication: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false
       },
       checkin: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false
       },
       accuracy: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false
       },
       location: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false
       },
       value: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false
       }
     // }

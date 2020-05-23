@@ -29,7 +29,7 @@ create a for loop to 10, on each iteration create a new csv file which populates
 */
 
 let reviewStream = fs.createWriteStream(path);
-reviewStream.write(`id,username,date,text,avatar\n`, 'utf8');
+// reviewStream.write(`id,username,date,text,avatar\n`, 'utf8');
 
 /* needs work to be fully automatic*/
 function writeReviews (writer, encoding, callback) {
@@ -42,7 +42,7 @@ function writeReviews (writer, encoding, callback) {
       currentId++;
       let username = faker.internet.userName();
       let date = `${faker.date.month()} ${randomYear()}`
-      let text = faker.lorem.sentences();
+      let text = faker.lorem.words();
       let avatar = faker.image.avatar();
       let data = `${currentId},${username},${date},${text},${avatar}\n`;
       if (toReach === 0) {

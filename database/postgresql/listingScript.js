@@ -23,7 +23,7 @@ function writeListings (writer, encoding, callback) {
     do {
       toReach--;
       currentId++;
-      let name = faker.random.words();
+      let name = faker.name.firstName();
       let data = `${currentId},${name}\n`;
       if (toReach === 0) {
         writer.write(data, encoding, callback);
