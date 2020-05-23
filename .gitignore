@@ -35,4 +35,4 @@ database/seed.js
 
 /csv/Reviews/
 /csv/Listings/
-# /csv/Scores/
+/csv/Scores/
