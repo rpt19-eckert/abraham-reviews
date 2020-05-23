@@ -12,6 +12,7 @@
     "react-dev": "webpack -d --watch --mode=development",
     "server-dev": "nodemon server/index.js",
     "listing-seed": "node ./database/postgresql/listingScript.js",
+    "review-seed": "node ./database/postgresql/reviewScript.js",
     "test": "jest"
   },
   "dependencies": {
