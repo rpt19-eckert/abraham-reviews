@@ -52,6 +52,7 @@ const Review = sequelize.define('Review', {
 const Score = sequelize.define('Score', {
   // scores: [
     // {
+<<<<<<< HEAD
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true
@@ -78,14 +79,43 @@ const Score = sequelize.define('Score', {
       },
       value: {
         type: DataTypes.DECIMAL,
+=======
+      cleanliness: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      communication: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      checkin: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      accuracy: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      location: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      value: {
+        type: DataTypes.INTEGER,
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e
         allowNull: false
       }
     // }
   // ]
 });
 
+<<<<<<< HEAD
 Review.belongsTo(Listing, { as: 'ListingRef', foreignKey: 'listingId' });
 Review.hasMany(Score, { as: 'score' })
+=======
+Listing.belongsToMany(Review, { through: Score });
+
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e
 
 sequelize.sync({ force: true });
 

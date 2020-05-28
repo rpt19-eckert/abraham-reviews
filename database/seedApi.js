@@ -54,6 +54,7 @@ while (listingIndex < 100) {
 }
 
 //drops reviews if exist and inserts in else block
+<<<<<<< HEAD
 // Reviews.deleteMany({id: {$gt: 1} }, (err) => {
 //   if (err) {
 //     console.error('Error in deleteMany');
@@ -69,3 +70,20 @@ while (listingIndex < 100) {
 //     });
 //   }
 // })
+=======
+Reviews.deleteMany({id: {$gt: 1} }, (err) => {
+  if (err) {
+    console.error('Error in deleteMany');
+  } else {
+    console.log('Successful deleteMany');
+    //insert many reviews to feed database
+    Reviews.insertMany(reviewStore, (err, data) => {
+      if (err) {
+        console.error('Error: ', err)
+      } else {
+        console.log('Success insertMany: ', data);
+      }
+    });
+  }
+})
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e

@@ -13,7 +13,10 @@
     "server-dev": "nodemon server/index.js",
     "listing-seed": "node ./database/postgresql/listingScript.js",
     "review-seed": "node ./database/postgresql/reviewScript.js",
+<<<<<<< HEAD
     "score-seed": "node ./database/postgresql/scoreScript.js",
+=======
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e
     "test": "jest"
   },
   "dependencies": {

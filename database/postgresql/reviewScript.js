@@ -1,4 +1,8 @@
 const fs = require('fs');
+<<<<<<< HEAD
+=======
+const stringify = require('csv-stringify');
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e
 const path = './csv/Reviews/reviews.csv';
 const faker = require('faker');
 
@@ -23,6 +27,7 @@ let randomYear = () => {
   return years[year];
 }
 
+<<<<<<< HEAD
 //create a random listing id for each review to reference.
 let randomListingId = () => {
   let result = Math.floor(Math.random() * 10000000);
@@ -34,6 +39,21 @@ let randomListingId = () => {
 
 let reviewStream = fs.createWriteStream(path);
 // reviewStream.write(`id,username,date,text,avatar\n`, 'utf8');
+=======
+
+
+
+
+
+
+/*
+create 10 files to populate 1 million records into each
+create a for loop to 10, on each iteration create a new csv file which populates another 1 million
+*/
+
+let reviewStream = fs.createWriteStream(path);
+reviewStream.write(JSON.stringify(columns), 'utf8');
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e
 
 /* needs work to be fully automatic*/
 function writeReviews (writer, encoding, callback) {
@@ -44,6 +64,7 @@ function writeReviews (writer, encoding, callback) {
     do {
       toReach--;
       currentId++;
+<<<<<<< HEAD
       let username = faker.internet.userName();
       let date = `${faker.date.month()} ${randomYear()}`
       let text = faker.lorem.words();
@@ -54,6 +75,19 @@ function writeReviews (writer, encoding, callback) {
         writer.write(data, encoding, callback);
       } else  {
         ok = writer.write(data, encoding);
+=======
+      let data = [
+        { id: currentId },
+        { username: faker.internet.userName() },
+        { date: `${faker.date.month()} ${randomYear()}` },
+        { text: faker.lorem.sentences() },
+        { avatar: faker.image.avatar() }
+      ]
+      if (toReach === 0) {
+        writer.write(JSON.stringify(data), encoding, callback);
+      } else  {
+        ok = writer.write(JSON.stringify(data), encoding);
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e
       }
     }
     while (toReach > 0 && ok);
@@ -66,4 +100,46 @@ function writeReviews (writer, encoding, callback) {
 
 writeReviews(reviewStream, 'utf-8', () => {
   reviewStream.end();
+<<<<<<< HEAD
 });
+=======
+})
+
+
+
+
+
+
+// while (currentId <= toReach) {
+//   currentId++;
+//   generatedReviews.push(
+//     { id: currentId },
+//     { username: faker.internet.userName() },
+//     { date: `${faker.date.month()} ${randomYear()}` },
+//     { text: faker.lorem.sentences() },
+//     { avatar: faker.image.avatar() }
+//   )
+// }
+
+// let writeStream = fs.createWriteStream(path);
+// stringify(generatedReviews, { heaeder: true, columns: columns}, (err, data) => {
+//   if (err) {
+//     throw err;
+//   } else {
+//     writeStream.write(data);
+//   }
+//   writeStream.on('finish', () => console.log('wrote all data to file'));
+//   writeStream.end();
+// });
+
+//use csv-stringify to stringiy columns and data
+/*
+stringify(generatedReviews, { header: true, columns: columns}, (err, data) => {
+  if (err) throw err;
+  fs.writeFile(path, data, (err) => {
+    if (err) throw err;
+    console.log(`Path saved at ${path}`);
+  });
+});
+*/
+>>>>>>> ec6251b176abc71dab4feb48edf10d564c939e4e
