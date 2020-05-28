@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const Review = require('../database/postgresql/pgIndex.js');
+const {Review} = require('../database/postgresql/pgIndex.js');
 var expressStaticGzip = require("express-static-gzip");
 const faker = require('faker');
 
@@ -20,7 +20,7 @@ app.use('/', expressStaticGzip(path.join(__dirname + '/../public'), {
 //For other services, Get avg score & # of reviews e.g. '2.78, 12 reviews'
 app.get('/averageScore:id', (req, res) => {
   let listId = req.params.id;
-  Reviews.find({id: listId}, (err, result) => {
+  Review.findOne({id: listId}, (err, result) => {
     if (err) {
       console.log('error in averageScore', err);
       res.sendStatus(404);
@@ -61,7 +61,7 @@ app.get('/listing', (req, res) => {
   //if text of listing...
   if (!result) {
     console.log('result: ', result)
-    Reviews.find({name: listId}, (err, result) => {
+    Review.findOne({id: listId}, (err, result) => {
       if (err) {
         console.log('error in Reviews.find', err);
         res.sendStatus(404);
@@ -71,8 +71,8 @@ app.get('/listing', (req, res) => {
     })
     //else if id of listing...
   } else {
-    Reviews.find({id: listId}, (err, result) => {
-      console.log(JSON.stringify(result))
+    Review.findOne({id: listId}, (err, result) => {
+      console.log(JSON.stringify('result in else: ', result))
       if (err) {
         console.log('error in Reviews.find', err);
         res.sendStatus(404);
@@ -118,7 +118,7 @@ app.post('/listing/review', (req, res) => {
     }
     return id;
   }
-    Reviews.create({
+    Review.create({
       id: incrementIdValue(), //need to resolve by incrementing +1 each time a new review is created.
       name: faker.name.findName(),
       reviews: {
@@ -153,7 +153,7 @@ app.put('/listing/update/:listingId', (req, res) => {
   let listingId = req.params.listingId;
   console.log('listing id: ', listingId);
   let updateQuery = { id : listingId }
-  Reviews.findOneAndUpdate(updateQuery, {name: faker.lorem.words()}, (err, data) => {
+  Review.findOneAndUpdate(updateQuery, {name: faker.lorem.words()}, (err, data) => {
     if (err){
       res.status(404).send(err)
     } else {
@@ -169,7 +169,7 @@ app.delete('/listing/delete/:listingId', (req, res) => {
   let listingId = req.params.listingId;
   console.log('listing id: ', listingId);
   let deleteQuery = { id: listingId }
-  Reviews.deleteOne(deleteQuery, (err, data) => {
+  Review.deleteOne(deleteQuery, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
@@ -185,7 +185,7 @@ app.get('/listing/:listingId', (req, res) => {
   let listingId = req.params.listingId;
   console.log('listing id: ', listingId);
   let query = { id: listingId }
-  Reviews.findOne(query, (err, data) => {
+  Review.findOne(query, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {

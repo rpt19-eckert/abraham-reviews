@@ -84,8 +84,8 @@ const Score = sequelize.define('Score', {
   // ]
 });
 
-Listing.belongsToMany(Review, { through: Score });
-
+Review.belongsTo(Listing, { as: 'ListingRef', foreignKey: 'listingId' });
+Review.hasMany(Score, { as: 'score' })
 
 sequelize.sync({ force: true });
 

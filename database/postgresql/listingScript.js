@@ -12,7 +12,7 @@ const columns = {
 const generatedListings = [];
 
 let listingStream = fs.createWriteStream(path);
-listingStream.write('id,name\n', 'utf8');
+// listingStream.write('id,name\n', 'utf8');
 
 /* needs work to be fully automatic*/
 function writeListings (writer, encoding, callback) {

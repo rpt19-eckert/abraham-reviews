@@ -23,10 +23,14 @@ let randomYear = () => {
   return years[year];
 }
 
-/*
-create 10 files to populate 1 million records into each
-create a for loop to 10, on each iteration create a new csv file which populates another 1 million
-*/
+//create a random listing id for each review to reference.
+let randomListingId = () => {
+  let result = Math.floor(Math.random() * 10000000);
+  if (result === 0) {
+    result === 1;
+  }
+  return result;
+}
 
 let reviewStream = fs.createWriteStream(path);
 // reviewStream.write(`id,username,date,text,avatar\n`, 'utf8');
@@ -44,7 +48,8 @@ function writeReviews (writer, encoding, callback) {
       let date = `${faker.date.month()} ${randomYear()}`
       let text = faker.lorem.words();
       let avatar = faker.image.avatar();
-      let data = `${currentId},${username},${date},${text},${avatar}\n`;
+      let listingId = randomListingId();
+      let data = `${currentId},${username},${date},${text},${avatar},${listingId}\n`;
       if (toReach === 0) {
         writer.write(data, encoding, callback);
       } else  {

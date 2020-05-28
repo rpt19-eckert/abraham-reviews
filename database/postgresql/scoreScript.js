@@ -11,11 +11,17 @@ let floatNum = () => {
   return result;
 }
 
+//generate random reviewId
+let randomReviewId = () => {
+  return Math.floor(Math.random() * 10000000);
+}
+
+
 //generate script to feed Listings table
 const generatedListings = [];
 
 let scoreStream = fs.createWriteStream(path);
-scoreStream.write('id,cleanliness,communication,checkin,accuracy,location,value\n', 'utf8');
+// scoreStream.write('id,cleanliness,communication,checkin,accuracy,location,value\n', 'utf8');
 
 function writeScores (writer, encoding, callback) {
   let currentId = 0; //current counter of listingIds
@@ -31,8 +37,9 @@ function writeScores (writer, encoding, callback) {
       let accuracy = floatNum();
       let location = floatNum();
       let value = floatNum();
-
-      let data = `${currentId},${cleanliness},${communication},${checkin},${accuracy},${location},${value}\n`;
+      let reviewIndex = randomReviewId();
+      let data = `${currentId},${cleanliness},${communication},${checkin},${accuracy},${location},${value},${reviewIndex}\n`;
+      // let data = `${currentId},${cleanliness},${communication},${checkin},${accuracy},${location},${value}\n`;
       if (toReach === 0) {
         writer.write(data, encoding, callback);
       } else  {
