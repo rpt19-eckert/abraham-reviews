@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require('Sequelize');
 const sequelize = new Sequelize('postgres://me:password@localhost:5432/reviews')
 
+
 //establish db connection
 try {
   sequelize.authenticate();
@@ -12,9 +13,6 @@ try {
 //i will need to have a one to many relationship for my tables
 //Listing is the parent, where Reviews are the child of each Listing, and the Score are the children of each Review for each Listing
 
-//listing - review - score
-
-//create model
 const Listing = sequelize.define('Listing', {
   id: {
     type: DataTypes.INTEGER,
@@ -27,8 +25,6 @@ const Listing = sequelize.define('Listing', {
 });
 
 const Review = sequelize.define('Review', {
-  // reviews: [
-  //   {
       username: {
         type: DataTypes.STRING,
         allowNull: false
@@ -45,13 +41,9 @@ const Review = sequelize.define('Review', {
         type: DataTypes.STRING,
         allowNull: false
       }
-    // }
-  // ]
 });
 
 const Score = sequelize.define('Score', {
-  // scores: [
-    // {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true
@@ -80,8 +72,6 @@ const Score = sequelize.define('Score', {
         type: DataTypes.DECIMAL,
         allowNull: false
       }
-    // }
-  // ]
 });
 
 Review.belongsTo(Listing, { as: 'ListingRef', foreignKey: 'listingId' });
@@ -89,4 +79,4 @@ Review.hasMany(Score, { as: 'score' })
 
 sequelize.sync({ force: true });
 
-module.exports.Review = Review;
+module.exports.Review = { Review }

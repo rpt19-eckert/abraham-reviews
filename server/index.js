@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const {Review} = require('../database/postgresql/pgIndex.js');
+// const {Review} = require('../database/postgresql/pgIndex.js');
+const { getReviews } = require('../database/postgresql/queries.js')
 var expressStaticGzip = require("express-static-gzip");
 const faker = require('faker');
 
@@ -58,29 +59,40 @@ app.get('/listing', (req, res) => {
   //test to see if id num or listing string
   let result = reg.test(listId);
 
+  getReviews(listId, (err, data) => {
+    // data = JSON.stringify(data);
+    console.log('data: ', data);
+    if (err) {
+      console.log('Error: ', err);
+      res.status(500).send('Error');
+    } else {
+      res.status(200).json(data)
+    }
+  });
+
   //if text of listing...
-  if (!result) {
-    console.log('result: ', result)
-    Review.findOne({id: listId}, (err, result) => {
-      if (err) {
-        console.log('error in Reviews.find', err);
-        res.sendStatus(404);
-      } else {
-        res.send(result);
-      }
-    })
-    //else if id of listing...
-  } else {
-    Review.findOne({id: listId}, (err, result) => {
-      console.log(JSON.stringify('result in else: ', result))
-      if (err) {
-        console.log('error in Reviews.find', err);
-        res.sendStatus(404);
-      } else {
-        res.send(result);
-      }
-    })
-  }
+  // if (!result) {
+  //   console.log('result: ', result)
+  //   Review.findOne({id: listId}, (err, result) => {
+  //     if (err) {
+  //       console.log('error in Reviews.find', err);
+  //       res.sendStatus(404);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   })
+  //   //else if id of listing...
+  // } else {
+  //   Review.findOne({id: listId}, (err, result) => {
+  //     console.log(JSON.stringify('result in else: ', result))
+  //     if (err) {
+  //       console.log('error in Reviews.find', err);
+  //       res.sendStatus(404);
+  //     } else {
+  //       res.send(result);
+  //     }
+  //   })
+  // }
 });
 
 //Route to get index.html back after updating state

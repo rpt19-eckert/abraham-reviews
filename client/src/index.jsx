@@ -39,6 +39,7 @@ class App extends React.Component {
       data: {data: listingId},
       dataType: 'text',
       success: (results) => {
+        console.log('results client: ', results)
         let state = JSON.parse(results);
         console.log('state: ', state)
         this.setState(() => ({reviews: state}));
