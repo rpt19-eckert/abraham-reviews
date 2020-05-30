@@ -39,9 +39,8 @@ class App extends React.Component {
       data: {data: listingId},
       dataType: 'text',
       success: (results) => {
-        console.log('results client: ', results)
         let state = JSON.parse(results);
-        console.log('state: ', state)
+        console.log('state line 43: ', state)
         this.setState(() => ({reviews: state}));
       },
       error: (err) => {
@@ -51,6 +50,7 @@ class App extends React.Component {
   }
 
 render() {
+  console.log('state in render: ', this.state.reviews, typeof this.state.reviews)
   return (<div>
     <div id='reviewSection'>
     <Score reviews={this.state.reviews} />

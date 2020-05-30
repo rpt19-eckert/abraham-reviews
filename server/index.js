@@ -61,7 +61,7 @@ app.get('/listing', (req, res) => {
 
   getReviews(listId, (err, data) => {
     // data = JSON.stringify(data);
-    console.log('data: ', data);
+    console.log('data (server): ', data);
     if (err) {
       console.log('Error: ', err);
       res.status(500).send('Error');

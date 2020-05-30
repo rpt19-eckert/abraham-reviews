@@ -20,6 +20,7 @@ const getReviews = (queryId, callback) => {
   // let queryStr = `select * from listings join reviews on listings.id = reviews.${queryId} join scores on reviews.id = scores.${queryId}`;
   console.log('queryId: ', queryId)
   pool.query(queryStr, (err, data) => {
+    console.log('data (db): ', data.rows);
     if (err) {
       callback(err);
     } else {
