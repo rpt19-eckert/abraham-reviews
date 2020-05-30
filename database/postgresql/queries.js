@@ -12,27 +12,38 @@ pool.connect((err) => {
 });
 
 /* QUERIES */
-////////////////////////////////////
 
+//listings
+const getListings = (queryId, callback) => {
+  let listQry = `select * from listings where id = ${queryId}`
+  pool.query(listQry, (err, data) => {
+    if (err) callback(err);
+    else callback(null, data.rows[0]);
+  })
+}
+
+//reviews
 const getReviews = (queryId, callback) => {
-  console.log('queryId: ', queryId);
   let queryStr = `select * from reviews where listingid = ${queryId}`;
   // let queryStr = `select * from listings join reviews on listings.id = reviews.${queryId} join scores on reviews.id = scores.${queryId}`;
-  console.log('queryId: ', queryId)
   pool.query(queryStr, (err, data) => {
-    console.log('data (db): ', data.rows);
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, data.rows);
-    }
+    if (err) callback(err);
+    else callback(null, data.rows);
   });
 }
 
-////////////////////////////////////
-
+//scores
+const getScores = (queryId, callback) => {
+  let scoreQry = `select * from scores where reviewid = ${queryId}`;
+  pool.query(scoreQry, (err, data) => {
+    if (err) callback(err);
+    else callback(null, data.rows);
+  })
+}
 
 
 module.exports = {
-  getReviews
+  getListings,
+  getReviews,
+  getScores
 }

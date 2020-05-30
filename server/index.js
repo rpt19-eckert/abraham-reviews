@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 // const {Review} = require('../database/postgresql/pgIndex.js');
-const { getReviews } = require('../database/postgresql/queries.js')
+const { getListings, getReviews, getScores } = require('../database/postgresql/queries.js')
 var expressStaticGzip = require("express-static-gzip");
 const faker = require('faker');
 
@@ -59,15 +59,20 @@ app.get('/listing', (req, res) => {
   //test to see if id num or listing string
   let result = reg.test(listId);
 
-  getReviews(listId, (err, data) => {
-    // data = JSON.stringify(data);
-    console.log('data (server): ', data);
-    if (err) {
-      console.log('Error: ', err);
-      res.status(500).send('Error');
-    } else {
-      res.status(200).json(data)
-    }
+  getListings(listId, (err, listData) => {
+    getReviews(listId, (err, reviewData) => {
+      getScores(listId, (err, scoreData) => {
+        let reviews = {
+          id: listData.id,
+          name: listData.name,
+          reviews: reviewData,
+          scores: scoreData
+        }
+        console.log('server data: ', reviews);
+        if (err) res.status(500).send(err);
+        else res.status(200).send(reviews);
+      });
+    });
   });
 
   //if text of listing...
