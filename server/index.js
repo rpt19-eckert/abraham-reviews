@@ -75,29 +75,6 @@ app.get('/listing', (req, res) => {
     });
   });
 
-  //if text of listing...
-  // if (!result) {
-  //   console.log('result: ', result)
-  //   Review.findOne({id: listId}, (err, result) => {
-  //     if (err) {
-  //       console.log('error in Reviews.find', err);
-  //       res.sendStatus(404);
-  //     } else {
-  //       res.send(result);
-  //     }
-  //   })
-  //   //else if id of listing...
-  // } else {
-  //   Review.findOne({id: listId}, (err, result) => {
-  //     console.log(JSON.stringify('result in else: ', result))
-  //     if (err) {
-  //       console.log('error in Reviews.find', err);
-  //       res.sendStatus(404);
-  //     } else {
-  //       res.send(result);
-  //     }
-  //   })
-  // }
 });
 
 //Route to get index.html back after updating state

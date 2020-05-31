@@ -24,9 +24,9 @@ const getListings = (queryId, callback) => {
 
 //reviews
 const getReviews = (queryId, callback) => {
-  let queryStr = `select * from reviews where listingid = ${queryId}`;
+  let reviewQry = `select * from reviews where listingid = ${queryId}`;
   // let queryStr = `select * from listings join reviews on listings.id = reviews.${queryId} join scores on reviews.id = scores.${queryId}`;
-  pool.query(queryStr, (err, data) => {
+  pool.query(reviewQry, (err, data) => {
     if (err) callback(err);
     else callback(null, data.rows);
   });
@@ -40,7 +40,6 @@ const getScores = (queryId, callback) => {
     else callback(null, data.rows);
   })
 }
-
 
 module.exports = {
   getListings,
