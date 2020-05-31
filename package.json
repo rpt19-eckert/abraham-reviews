@@ -27,6 +27,7 @@
     "mongo-seeding": "^3.4.0",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.4",
+    "newrelic": "^6.8.0",
     "nodemon": "^2.0.3",
     "pg": "^8.2.1",
     "pg-hstore": "^2.3.3",
