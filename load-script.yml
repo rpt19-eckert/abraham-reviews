@@ -1,0 +1,13 @@
+config:
+  target: 'http://localhost:3004'
+  phases:
+    - duration: 600
+      arrivalRate: 1000
+      name: "Current max load"
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - get:
+        url: "/listing"
