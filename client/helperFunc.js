@@ -5,9 +5,11 @@ const score = (value) => {
   }
   let finalScore = 0;
   let helperScore = 0;
-  let reviews = value[0].reviews;
+  // console.log('value in helperF: ', value.reviews);
+  let reviews = value.reviews;
+  // console.log('reviews in  hF: ', reviews);
   for (let i = 0; i < reviews.length; i++) {
-    let scores = reviews[i].scores[0];
+    let scores = value.scores[0];
 
     helperScore += +scores.cleanliness;
     helperScore += +scores.communication;
@@ -26,7 +28,7 @@ const totalReviews = (value) => {
   if (value.length === 0) {
     return 0;
   } else {
-    return value[0].reviews.length;
+    return value.reviews.length;
   }
 }
 
@@ -50,9 +52,9 @@ const attrScore = (value, attr) => {
     return 0;
   }
   let helperScore = 0;
-  let reviews = value[0].reviews;
+  let reviews = value.reviews;
   for (let i = 0; i < reviews.length; i++) {
-    let scores = reviews[i].scores[0];
+    let scores = value.scores[0];
     helperScore += +scores[attr];
   }
   return (helperScore / reviews.length);

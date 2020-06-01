@@ -22,6 +22,7 @@ class Score extends React.Component {
   }
 
   render() {
+    // console.log('props: ', this.props);
     return (<div style={divStyle}>
       <img src='https://fec-photos.s3-us-west-1.amazonaws.com/otherPics/airbnb_star.png' alt='Star' style={imgStyle} /> {(score(this.props.reviews)).toFixed(2)}    ({totalReviews(this.props.reviews)} reviews)
     </div>)
