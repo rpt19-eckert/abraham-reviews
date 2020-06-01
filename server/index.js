@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const path = require('path');
 // const {Review} = require('../database/postgresql/pgIndex.js');
@@ -62,19 +63,41 @@ app.get('/listing', (req, res) => {
   getListings(listId, (err, listData) => {
     getReviews(listId, (err, reviewData) => {
       getScores(listId, (err, scoreData) => {
-        let reviews = {
-          id: listData.id,
-          name: listData.name,
-          reviews: reviewData,
-          scores: scoreData
-        }
+        // let reviews = {};
+        // for (let i = 0; i < reviewData.length; i++) {
+        //   for (let y = 0; y < scoreData.length; y++) {
+            let reviews = {
+              id: listData.id,
+              name: listData.name,
+              reviews: reviewData,
+              // reviews: [{
+              //   id: reviewData[i].id,
+              //   username: reviewData[i].username,
+              //   date: reviewData[i].date,
+              //   text: reviewData[i].text,
+              //   avatar: reviewData[i].avatar,
+              //   listingId: reviewData[i].listingid,
+              //   scores: [{
+              //     id: scoreData[y].id,
+              //     cleanliness: scoreData[y].cleanliness,
+              //     communication: scoreData[y].communication,
+              //     checkin: scoreData[y].checkin,
+              //     accuracy: scoreData[y].accuracy,
+              //     location: scoreData[y].location,
+              //     value: scoreData[y].value,
+              //     reviewid: scoreData[y].reviewid
+              //   }]
+              // }],
+              scores: scoreData
+            }
+        //   }
+        // }
         console.log('server data: ', reviews);
         if (err) res.status(500).send(err);
         else res.status(200).send(reviews);
       });
     });
   });
-
 });
 
 //Route to get index.html back after updating state
@@ -176,16 +199,22 @@ app.delete('/listing/delete/:listingId', (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/listing/:listingId', (req, res) => {
-  let listingId = req.params.listingId;
-  console.log('listing id: ', listingId);
-  let query = { id: listingId }
-  Review.findOne(query, (err, data) => {
-    if (err) {
-      res.status(404).send(err);
-    } else {
-      console.log('Successful get.')
-      res.status(200).send('File retrieved.');
-    }
+  let listId = req.params.listingId;
+  console.log('listing id: ', listId);
+  getListings(listId, (err, listData) => {
+    getReviews(listId, (err, reviewData) => {
+      getScores(listId, (err, scoreData) => {
+        let reviews = {
+          id: listData.id,
+          name: listData.name,
+          reviews: reviewData,
+          scores: scoreData
+        }
+        console.log('server data: ', reviews);
+        if (err) res.status(500).send(err);
+        else res.status(200).send(reviews);
+      });
+    });
   });
 });
 
