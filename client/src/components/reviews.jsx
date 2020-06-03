@@ -15,9 +15,11 @@ class Reviews extends React.Component {
   }
 
   render() {
+    console.log('props in reviews: ', this.props.reviews.reviews);
     return (<div style={divStyle}>
       {this.props.reviews.length > 0 &&
-        this.props.reviews[0].reviews.map((item, index) => {
+        this.props.reviews.reviews.map((item, index) => {
+        console.log('item: ', item);
         return <Review key={index} reviews={item} />
       })}
     </div>)

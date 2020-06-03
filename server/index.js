@@ -63,35 +63,12 @@ app.get('/listing', (req, res) => {
   getListings(listId, (err, listData) => {
     getReviews(listId, (err, reviewData) => {
       getScores(listId, (err, scoreData) => {
-        // let reviews = {};
-        // for (let i = 0; i < reviewData.length; i++) {
-        //   for (let y = 0; y < scoreData.length; y++) {
-            let reviews = {
-              id: listData.id,
-              name: listData.name,
-              reviews: reviewData,
-              // reviews: [{
-              //   id: reviewData[i].id,
-              //   username: reviewData[i].username,
-              //   date: reviewData[i].date,
-              //   text: reviewData[i].text,
-              //   avatar: reviewData[i].avatar,
-              //   listingId: reviewData[i].listingid,
-              //   scores: [{
-              //     id: scoreData[y].id,
-              //     cleanliness: scoreData[y].cleanliness,
-              //     communication: scoreData[y].communication,
-              //     checkin: scoreData[y].checkin,
-              //     accuracy: scoreData[y].accuracy,
-              //     location: scoreData[y].location,
-              //     value: scoreData[y].value,
-              //     reviewid: scoreData[y].reviewid
-              //   }]
-              // }],
-              scores: scoreData
-            }
-        //   }
-        // }
+        let reviews = {
+          id: listData.id,
+          name: listData.name,
+          reviews: reviewData,
+          scores: scoreData
+        }
         console.log('server data: ', reviews);
         if (err) res.status(500).send(err);
         else res.status(200).send(reviews);

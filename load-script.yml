@@ -1,9 +1,18 @@
 config:
   target: 'http://localhost:3004'
   phases:
+    - duration: 60
+      arrivalRate: 1
+      name: "1 rps - warm up"
+    - duration: 120
+      arrivalRate: 10
+      name: "10rps - warm up"
+    - duration: 300
+      arrivalRate: 100
+      name: "100rps - load"
     - duration: 600
       arrivalRate: 1000
-      name: "Current max load"
+      name: "1000rps - max load"
   defaults:
     headers:
       x-my-service-auth: '987401838271002188298567'

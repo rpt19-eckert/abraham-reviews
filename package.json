@@ -15,7 +15,7 @@
     "review-seed": "node ./database/postgresql/reviewScript.js",
     "score-seed": "node ./database/postgresql/scoreScript.js",
     "test": "jest",
-    "artillery": "artillery run load-script.yml"
+    "artillery": "artillery run -o report.json load-script.yml"
   },
   "dependencies": {
     "csv-stringify": "^5.5.0",
