@@ -1,8 +1,8 @@
 require('newrelic');
 const express = require('express');
 const path = require('path');
-// const {Review} = require('../database/postgresql/pgIndex.js');
-const { getListings, getReviews, getScores } = require('../database/postgresql/queries.js')
+const {Review, Score} = require('../database/postgresql/pgIndex.js');
+const { getListings, getReviews, getScores, newPost} = require('../database/postgresql/queries.js')
 var expressStaticGzip = require("express-static-gzip");
 const faker = require('faker');
 
@@ -112,33 +112,65 @@ app.post('/listing/review', (req, res) => {
     }
     return id;
   }
-    Review.create({
-      id: incrementIdValue(), //need to resolve by incrementing +1 each time a new review is created.
-      name: faker.name.findName(),
-      reviews: {
-        username: faker.name.findName(),
-        date: `${faker.date.month()} ${genYear()}`,
-        text: faker.lorem.paragraph(),
-        avatar: faker.internet.avatar(),
-        scores: [
-          {
-            cleanliness: randomRating(),
-            communication: randomRating(),
-            checkin: randomRating(),
-            accuracy: randomRating(),
-            location: randomRating(),
-            value: randomRating()
-          }
-        ]
-      }
-    }, (err, data) => {
-      if (err) {
-        res.status(404).json('Error posting new review.')
-      } else {
-        console.log('Successful create');
-        res.status(200).send(data)
-      }
-    });
+
+  let randomListingId = () => {
+    let result = Math.floor(Math.random() * 10000000);
+    return result;
+  }
+
+  let newData = {
+    name: faker.name.findName(),
+    reviews: [{
+      username: faker.internet.userName(),
+      date: `${faker.date.month()} ${genYear()}`,
+      text: faker.lorem.words(),
+      avatar: faker.image.avatar(),
+      listingid: randomListingId()
+    }],
+    scores: [{
+      cleanliness: randomRating(),
+      communication: randomRating(),
+      checkin: randomRating(),
+      accuracy: randomRating(),
+      location: randomRating(),
+      value: randomRating(),
+      reviewid: randomListingId()
+    }]
+  }
+
+  newPost(newData, (err) => {
+    if (err) res.status(500);
+    else res.status(200).send('newPost!')
+  })
+
+    // Review.create({
+    //   id: incrementIdValue(), //need to resolve by incrementing +1 each time a new review is created.
+    //   name: faker.name.findName(),
+    //   reviews: {
+    //     username: faker.name.findName(),
+    //     date: `${faker.date.month()} ${genYear()}`,
+    //     text: faker.lorem.paragraph(),
+    //     avatar: faker.internet.avatar(),
+    //     scores: [
+    //       {
+    //         cleanliness: randomRating(),
+    //         communication: randomRating(),
+    //         checkin: randomRating(),
+    //         accuracy: randomRating(),
+    //         location: randomRating(),
+    //         value: randomRating()
+    //       }
+    //     ]
+    //   }
+    // },
+    // (err, data) => {
+    //   if (err) {
+    //     res.status(404).json('Error posting new review.')
+    //   } else {
+    //     console.log('Successful create');
+    //     res.status(200).send(data)
+    //   }
+    // });
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

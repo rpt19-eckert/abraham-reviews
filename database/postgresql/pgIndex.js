@@ -74,9 +74,10 @@ const Score = sequelize.define('Score', {
       }
 });
 
-Review.belongsTo(Listing, { as: 'ListingRef', foreignKey: 'listingId' });
-Review.hasMany(Score, { as: 'score' })
+// Review.belongsTo(Listing, { as: 'ListingRef', foreignKey: 'listingId' });
+// Review.hasMany(Score, { as: 'score' })
+// sequelize.sync({ force: true });
 
-sequelize.sync({ force: true });
-
-module.exports.Review = { Review }
+module.exports = {
+  Review, Score
+}
