@@ -32,6 +32,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    console.log('props in Profile:', this.props.reviews);
     return (<div style={divStyle}>
       <img src={this.props.reviews.avatar} style={imgStyle}></img>
       <div style={textStyle}><b>{this.props.reviews.username.split(' ')[0]}</b>

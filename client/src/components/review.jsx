@@ -16,6 +16,7 @@ class Review extends React.Component {
   }
 
   render() {
+    console.log('props in Review:', this.props.reviews);
     return (<div style={divStyle}>
       <div><Profile reviews={this.props.reviews}/>
       <br></br>
