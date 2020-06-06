@@ -50,34 +50,17 @@ const newPost = (data, callback) => {
     RETURNING id),
     review AS (
       INSERT INTO reviews (id, username, date, text, avatar, listingid) VALUES (${data.id},${data.username},${data.date},${data.text},${data.avatar},${data.listingid})
-    RETURNING id)
+    ),
     score AS (
-      INSERT INTO listings(id, cleanliness, communication, checkin, accuracy, location, value, reviewid)
+      INSERT INTO scores(id, cleanliness, communication, checkin, accuracy, location, value, reviewid)
       VALUES (${data.id},${data.cleanliness},${data.communication},${data.checkin},${data.accuracy},${data.location},${data.value},${data.reviewid})
-    RETURNING id)`;
+    )`;
+
   pool.query(newInsert, (err, data) => {
     if (err) callback(err);
     else callback(null, data);
   });
 };
-
-// const postReviews = (data, callback) => {
-//   console.log('data db post R', data)
-//   let insertReview = `INSERT INTO reviews(username, date, text, avatar, listingid) VALUES (${data.username},${data.date},${data.text},${data.avatar},${data.listingid})`;
-//   pool.query(insertReview, (err, data) => {
-//     if (err) callback(err);
-//     else callback(null, data);
-//   });
-// };
-
-// const postScores = (data, callback) => {
-//   console.log('data db post S', data)
-//   let insertScores = `INSERT INTO listings(cleanliness, communication, checkin, accuracy, location, value, reviewid) VALUES (${data.cleanliness},${data.communication},${data.checkin},${data.accuracy},${data.location},${data.value},${data.reviewid})`;
-//   pool.query(insertScores, (err, data) => {
-//     if (err) callback(err);
-//     else callback(null, data);
-//   });
-// };
 
 module.exports = {
   getListings,
