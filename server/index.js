@@ -2,7 +2,7 @@ require('newrelic');
 const express = require('express');
 const path = require('path');
 const {Review, Score} = require('../database/postgresql/pgIndex.js');
-const { getListings, getReviews, getScores, newPost} = require('../database/postgresql/queries.js')
+const { getListings, getReviews, getScores, newReview,newScore,newListing} = require('../database/postgresql/queries.js')
 var expressStaticGzip = require("express-static-gzip");
 const faker = require('faker');
 
@@ -119,31 +119,41 @@ app.post('/listing/review', (req, res) => {
     return result;
   }
 
-  let newData = {
-    name: faker.name.findName(),
-    reviews: [{
-      username: faker.internet.userName(),
-      date: `${faker.date.month()} ${genYear()}`,
-      text: faker.lorem.words(),
-      avatar: faker.image.avatar(),
-      listingid: randomListingId()
-    }],
-    scores: [{
-      cleanliness: randomRating(),
-      communication: randomRating(),
-      checkin: randomRating(),
-      accuracy: randomRating(),
-      location: randomRating(),
-      value: randomRating(),
-      reviewid: randomListingId()
-    }]
+  let randomId = () => {
+    let result = Math.floor(Math.random() * 10000000 + 2000000);
+    return result;
   }
 
-  newPost(newData, (err, data) => {
-    if (err) res.status(500).send(err);
-    else res.status(200).send('Success');
-  });
-
+  let listingData = {
+    id: 10000004,
+    name: faker.name.findName()
+  }
+  let reviewData = {
+    id: 10000004,
+    username: faker.internet.userName(),
+    date: `${faker.date.month()} ${genYear()}`,
+    text: faker.lorem.words(),
+    avatar: faker.image.avatar(),
+    listingid: randomListingId()
+  }
+  let scoreData = {
+    id: 10000004,
+    cleanliness: randomRating(),
+    communication: randomRating(),
+    checkin: randomRating(),
+    accuracy: randomRating(),
+    location: randomRating(),
+    value: randomRating(),
+    reviewid: randomListingId()
+  }
+  newListing(listingData, (err) => {
+    newReview(reviewData, (err) => {
+      newScore(scoreData, (err) => {
+        if (err) res.status(500).send(err);
+        else res.status(200).send('SUCCESS');
+      })
+    })
+  })
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -42,29 +42,53 @@ const getScores = (queryId, callback) => {
 };
 
 /* POST QUERIES */
-
-const newPost = (data, callback) => {
-  console.log('data db post L', data)
-  let newInsert = `WITH listing AS (
-    INSERT INTO listings (id, name) VALUES(${data.id},${data.name}),
-    RETURNING id),
-    review AS (
-      INSERT INTO reviews (id, username, date, text, avatar, listingid) VALUES (${data.id},${data.username},${data.date},${data.text},${data.avatar},${data.listingid})
-    ),
-    score AS (
-      INSERT INTO scores(id, cleanliness, communication, checkin, accuracy, location, value, reviewid)
-      VALUES (${data.id},${data.cleanliness},${data.communication},${data.checkin},${data.accuracy},${data.location},${data.value},${data.reviewid})
-    )`;
-
-  pool.query(newInsert, (err, data) => {
+const newListing = (data, callback) => {
+  console.log('listing db', data)
+  let insert = `INSERT INTO listings (id, name) VALUES (${data.id},${data.name})`;
+  pool.query(insert, (err, data) => {
     if (err) callback(err);
     else callback(null, data);
   });
-};
+}
+
+const newReview = (data, callback) => {
+  console.log('review db:', data)
+  let insert =  `INSERT INTO reviews (id, username, date, text, avatar, listingid) VALUES (${data.id},${data.username},${data.date},${data.text},${data.avatar},${data.listingid})`;
+  pool.query(insert, (err, data) => {
+    if (err)  callback(err);
+    else callback(null, data);
+  });
+}
+
+const newScore = (data,callback) => {
+  console.log('score db:', data)
+  let insert = `INSERT INTO scores(id, cleanliness, communication, checkin, accuracy, location, value, reviewid) VALUES (${data.id},${data.cleanliness},${data.communication},${data.checkin},${data.accuracy},${data.location},${data.value},${data.reviewid})`;
+  pool.query(insert, (err, data) => {
+    if (err) callback(err);
+    else callback(null, data);
+  });
+}
+// const newPost = (data, callback) => {
+//   console.log('data db:', data);
+//   let newInsert = `WITH review AS (
+//       INSERT INTO reviews (id, username, date, text, avatar, listingid) VALUES (${data.id},${data.username},${data.date},${data.text},${data.avatar},${data.listingid})
+//     ),
+//     score AS (
+//       INSERT INTO scores(id, cleanliness, communication, checkin, accuracy, location, value, reviewid)
+//       VALUES (${data.id},${data.cleanliness},${data.communication},${data.checkin},${data.accuracy},${data.location},${data.value},${data.reviewid})
+//     )`;
+
+//   pool.query(newInsert, (err, data) => {
+//     if (err) callback(err);
+//     else callback(null, data);
+//   });
+// };
 
 module.exports = {
   getListings,
   getReviews,
   getScores,
-  newPost
+  newReview,
+  newScore,
+  newListing
 }
