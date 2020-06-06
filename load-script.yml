@@ -9,10 +9,13 @@ config:
       name: "10rps - warm up"
     - duration: 300
       arrivalRate: 100
-      name: "100rps - load"
-    - duration: 600
-      arrivalRate: 1000
-      name: "1000rps - max load"
+      name: "100rps"
+    - duration: 300
+      arrivalRate: 200
+      name: "200rps"
+    - duration: 300
+      arrivalRate: 300
+      name: "300rps"
   defaults:
     headers:
       x-my-service-auth: '987401838271002188298567'
