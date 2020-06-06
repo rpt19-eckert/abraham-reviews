@@ -75,6 +75,7 @@ app.get('/listing', (req, res) => {
       });
     });
   });
+
 });
 
 //Route to get index.html back after updating state
@@ -138,39 +139,11 @@ app.post('/listing/review', (req, res) => {
     }]
   }
 
-  newPost(newData, (err) => {
-    if (err) res.status(500);
-    else res.status(200).send('newPost!')
-  })
+  newPost(newData, (err, data) => {
+    if (err) res.status(500).send(err);
+    else res.status(200).send('Success');
+  });
 
-    // Review.create({
-    //   id: incrementIdValue(), //need to resolve by incrementing +1 each time a new review is created.
-    //   name: faker.name.findName(),
-    //   reviews: {
-    //     username: faker.name.findName(),
-    //     date: `${faker.date.month()} ${genYear()}`,
-    //     text: faker.lorem.paragraph(),
-    //     avatar: faker.internet.avatar(),
-    //     scores: [
-    //       {
-    //         cleanliness: randomRating(),
-    //         communication: randomRating(),
-    //         checkin: randomRating(),
-    //         accuracy: randomRating(),
-    //         location: randomRating(),
-    //         value: randomRating()
-    //       }
-    //     ]
-    //   }
-    // },
-    // (err, data) => {
-    //   if (err) {
-    //     res.status(404).json('Error posting new review.')
-    //   } else {
-    //     console.log('Successful create');
-    //     res.status(200).send(data)
-    //   }
-    // });
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
