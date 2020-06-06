@@ -68,21 +68,6 @@ const newScore = (data,callback) => {
     else callback(null, data);
   });
 }
-// const newPost = (data, callback) => {
-//   console.log('data db:', data);
-//   let newInsert = `WITH review AS (
-//       INSERT INTO reviews (id, username, date, text, avatar, listingid) VALUES (${data.id},${data.username},${data.date},${data.text},${data.avatar},${data.listingid})
-//     ),
-//     score AS (
-//       INSERT INTO scores(id, cleanliness, communication, checkin, accuracy, location, value, reviewid)
-//       VALUES (${data.id},${data.cleanliness},${data.communication},${data.checkin},${data.accuracy},${data.location},${data.value},${data.reviewid})
-//     )`;
-
-//   pool.query(newInsert, (err, data) => {
-//     if (err) callback(err);
-//     else callback(null, data);
-//   });
-// };
 
 module.exports = {
   getListings,

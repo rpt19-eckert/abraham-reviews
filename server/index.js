@@ -125,11 +125,11 @@ app.post('/listing/review', (req, res) => {
   }
 
   let listingData = {
-    id: 10000004,
+    id: 10000008,
     name: faker.name.findName()
   }
   let reviewData = {
-    id: 10000004,
+    id: 10000008,
     username: faker.internet.userName(),
     date: `${faker.date.month()} ${genYear()}`,
     text: faker.lorem.words(),
@@ -137,14 +137,14 @@ app.post('/listing/review', (req, res) => {
     listingid: randomListingId()
   }
   let scoreData = {
-    id: 10000004,
+    id: 10000008,
     cleanliness: randomRating(),
     communication: randomRating(),
     checkin: randomRating(),
     accuracy: randomRating(),
     location: randomRating(),
     value: randomRating(),
-    reviewid: randomListingId()
+    reviewid: reviewData.listingid
   }
   newListing(listingData, (err) => {
     newReview(reviewData, (err) => {
