@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('postgres://me:password@localhost:5432/reviews')
+const sequelize = new Sequelize('postgres://me:password@18.144.59.167:5432/reviews')
 
 
 //establish db connection
