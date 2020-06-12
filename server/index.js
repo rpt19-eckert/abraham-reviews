@@ -213,8 +213,8 @@ app.get('/listing/:listingId', (req, res) => {
 
 
 
-app.listen(3004, () => {
-  console.log('Listening on port 3004');
+app.listen(3005, () => {
+  console.log('Listening on port 3005');
 });
 
 module.exports = app;
