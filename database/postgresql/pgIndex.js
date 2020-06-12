@@ -7,7 +7,7 @@ try {
   sequelize.authenticate();
   console.log('Connected to Postgrest db successfully.')
 } catch (error) {
-  console.log('Unable to connect to Postgres db.')
+  console.log('Unable to connect to Postgres db.', error)
 }
 
 //i will need to have a one to many relationship for my tables
