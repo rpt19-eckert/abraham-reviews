@@ -1,6 +1,9 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('postgres://me:password@localhost:5432/reviews')
-
+// const sequelize = new Sequelize('postgres://me:password@localhost:5432/reviews')
+const sequelize = new Sequelize('airbnb_reviews','postgres', 'password', {
+  host: 'ec2-54-153-10-175.us-west-1.compute.amazonaws.com',
+  dialect: 'postgres'
+});
 
 //establish db connection
 try {
@@ -79,5 +82,5 @@ const Score = sequelize.define('Score', {
 // sequelize.sync({ force: true });
 
 module.exports = {
-  Review, Score
+  Listing, Review, Score
 }
