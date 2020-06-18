@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 // const sequelize = new Sequelize('postgres://me:password@localhost:5432/reviews')
 const sequelize = new Sequelize('airbnb_reviews','postgres', 'password', {
-  host: 'ec2-3-101-24-86.us-west-1.compute.amazonaws.com',
+  host: 'ec2-54-177-131-10.us-west-1.compute.amazonaws.com',
   dialect: 'postgres'
 });
 
